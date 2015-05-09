@@ -13,6 +13,8 @@
 		11CE585C1AF700D800EEB2D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11CE585B1AF700D800EEB2D2 /* Images.xcassets */; };
 		11CE585F1AF700D800EEB2D2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CE585D1AF700D800EEB2D2 /* LaunchScreen.xib */; };
 		11CE586B1AF700D800EEB2D2 /* NameThatAirportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CE586A1AF700D800EEB2D2 /* NameThatAirportTests.swift */; };
+		11CE58751AFD864100EEB2D2 /* AirportQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CE58741AFD864100EEB2D2 /* AirportQuestion.swift */; };
+		11CE58771AFD86A100EEB2D2 /* AirportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CE58761AFD86A100EEB2D2 /* AirportModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		11CE58641AF700D800EEB2D2 /* NameThatAirportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NameThatAirportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11CE58691AF700D800EEB2D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11CE586A1AF700D800EEB2D2 /* NameThatAirportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameThatAirportTests.swift; sourceTree = "<group>"; };
+		11CE58741AFD864100EEB2D2 /* AirportQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportQuestion.swift; sourceTree = "<group>"; };
+		11CE58761AFD86A100EEB2D2 /* AirportModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirportModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				11CE585B1AF700D800EEB2D2 /* Images.xcassets */,
 				11CE585D1AF700D800EEB2D2 /* LaunchScreen.xib */,
 				11CE58521AF700D800EEB2D2 /* Supporting Files */,
+				11CE58741AFD864100EEB2D2 /* AirportQuestion.swift */,
+				11CE58761AFD86A100EEB2D2 /* AirportModel.swift */,
 			);
 			path = NameThatAirport;
 			sourceTree = "<group>";
@@ -213,7 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				11CE58571AF700D800EEB2D2 /* ViewController.swift in Sources */,
+				11CE58751AFD864100EEB2D2 /* AirportQuestion.swift in Sources */,
 				11CE58551AF700D800EEB2D2 /* AppDelegate.swift in Sources */,
+				11CE58771AFD86A100EEB2D2 /* AirportModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
