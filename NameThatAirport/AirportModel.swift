@@ -20,11 +20,13 @@ class AirportModel: NSObject {
         
         for index in 0...airportNames.count-1 {
         
-            generatedQuestions[index] = AirportQuestion()
-            generatedQuestions[index].airportName = airportNames[index]
+            var airportQuestion = AirportQuestion()
+            airportQuestion.airportName = airportNames[index]
             
             // randomly pick other two answers
+            airportQuestion.setAnswerArray([airportNames[index], "222", "333"])
             
+            generatedQuestions.append(airportQuestion)
         }
         
         for index in 0...airportNames.count-1 {

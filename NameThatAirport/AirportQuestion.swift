@@ -12,4 +12,8 @@ class AirportQuestion: NSObject {
    
     var airportName = ""
     var answers:[String] = [String]()
+    
+    func setAnswerArray(answers:[String]) {
+        self.answers = answers
+    }
 }
