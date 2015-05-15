@@ -51,6 +51,11 @@ class ViewController: UIViewController {
             
             self.airportImageView.image = UIImage(named: filename)
             
+            UIView.animateWithDuration(0.25, animations: {
+                self.airportImageView.alpha = 1.0
+            })
+
+            
             self.answerButton1.setTitle(actualCurrentQuestion.answers[0], forState: UIControlState.Normal)
             self.answerButton2.setTitle(actualCurrentQuestion.answers[1], forState: UIControlState.Normal)
             self.answerButton3.setTitle(actualCurrentQuestion.answers[2], forState: UIControlState.Normal)
@@ -97,6 +102,7 @@ class ViewController: UIViewController {
         
         UIView.animateWithDuration(0.5, animations: {
             self.correctButton.alpha = 0.0
+            self.airportImageView.alpha = 0.0
         })
         
         // Find the current index of question
