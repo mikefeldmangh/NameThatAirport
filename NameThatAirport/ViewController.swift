@@ -19,8 +19,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var correctButton: UILabel!
     
     @IBOutlet weak var resultLabelLandscapeTopMargin: NSLayoutConstraint!
-    
     @IBOutlet weak var resultLabelPortraitTopMargin: NSLayoutConstraint!
+    
+    @IBOutlet weak var dimView: UIView!
+    @IBOutlet weak var scoreView: UIView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
     
     let model = AirportModel()
     var questions = [AirportQuestion]()
@@ -33,6 +37,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Hide the dim and result views
+        self.dimView.alpha = 0
+        self.scoreView.alpha = 0
         
         // Get the questions from the quiz model
         self.questions = self.model.getAirportQuestions()
@@ -90,11 +98,9 @@ class ViewController: UIViewController {
             self.correctButton.alpha = 1.0
         })
         
+        // Go to next airport
         var timer1 = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("changeAirport"), userInfo: nil, repeats: false)
         
-        
-        // go to next airport
-//        changeAirport()
     }
     
     
@@ -121,8 +127,21 @@ class ViewController: UIViewController {
                 self.displayCurrentAirport()
             } else {
                 // end of game
+                
+                showFinalScore()
             }
         }
+    }
+    
+    func showFinalScore() {
+        
+        scoreLabel.text = String(format: "%i / %i", self.numberCorrect, self.questions.count)
+        
+        // Show the dim and result views
+        UIView.animateWithDuration(1.0, animations: {
+            self.dimView.alpha = 1
+            self.scoreView.alpha = 1
+        })
     }
     
     override func didReceiveMemoryWarning() {
