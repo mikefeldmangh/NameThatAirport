@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var answerButton2: UIButton!
     @IBOutlet weak var answerButton3: UIButton!
     
-    @IBOutlet weak var correctButton: UILabel!
+    @IBOutlet weak var correctLabel: UILabel!
     
     @IBOutlet weak var resultLabelLandscapeTopMargin: NSLayoutConstraint!
     @IBOutlet weak var resultLabelPortraitTopMargin: NSLayoutConstraint!
@@ -73,16 +73,19 @@ class ViewController: UIViewController {
     
     @IBAction func answerTapped(sender: UIButton) {
     
+        // disable all answer buttons
+        enableAnswerButtons(false)
+        
         // check if answer is correct
         if sender.titleLabel?.text == self.currentQuestion?.airportName {
             // correct!
-            correctButton.backgroundColor = UIColor.greenColor()
-            correctButton.text = "Correct!"
+            correctLabel.backgroundColor = UIColor.greenColor()
+            correctLabel.text = "Correct!"
             numberCorrect++
         } else {
             // wrong!
-            correctButton.backgroundColor = UIColor.redColor()
-            correctButton.text = "Incorrect!"
+            correctLabel.backgroundColor = UIColor.redColor()
+            correctLabel.text = "Incorrect!"
         }
         
         self.resultLabelLandscapeTopMargin.constant = 900
@@ -95,7 +98,7 @@ class ViewController: UIViewController {
             self.resultLabelPortraitTopMargin.constant = 55
             self.view.layoutIfNeeded()
             
-            self.correctButton.alpha = 1.0
+            self.correctLabel.alpha = 1.0
         })
         
         // Go to next airport
@@ -103,11 +106,17 @@ class ViewController: UIViewController {
         
     }
     
+    func enableAnswerButtons(enable:Bool) {
+        self.answerButton1.enabled = enable;
+        self.answerButton2.enabled = enable;
+        self.answerButton3.enabled = enable;
+    }
+    
     
     func changeAirport() {
         
         UIView.animateWithDuration(0.5, animations: {
-            self.correctButton.alpha = 0.0
+            self.correctLabel.alpha = 0.0
             self.airportImageView.alpha = 0.0
         })
         
@@ -125,6 +134,8 @@ class ViewController: UIViewController {
                 // We can display another airport
                 self.currentQuestion = self.questions[nextQuestionIndex]
                 self.displayCurrentAirport()
+                // enable all answer buttons
+                enableAnswerButtons(true)
             } else {
                 // end of game
                 

@@ -318,7 +318,7 @@
                         <outlet property="answerButton2" destination="rPg-er-KmZ" id="w9F-hb-dKL"/>
                         <outlet property="answerButton3" destination="ZXD-tm-vDA" id="BU2-CJ-aPe"/>
                         <outlet property="answerView" destination="oB7-XU-DQ6" id="If7-a0-O2c"/>
-                        <outlet property="correctButton" destination="kmR-vR-cdQ" id="XmI-b6-D7C"/>
+                        <outlet property="correctLabel" destination="kmR-vR-cdQ" id="x9t-Zp-ABV"/>
                         <outlet property="dimView" destination="Z5r-Jb-Gxe" id="bub-uh-7mA"/>
                         <outlet property="resultLabelLandscapeTopMargin" destination="2Qq-VV-J0x" id="SvY-gh-p8h"/>
                         <outlet property="resultLabelPortraitTopMargin" destination="5kM-KW-P2J" id="jz1-Mw-O7l"/>
