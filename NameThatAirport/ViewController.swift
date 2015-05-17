@@ -77,15 +77,28 @@ class ViewController: UIViewController {
         enableAnswerButtons(false)
         
         // check if answer is correct
-        if sender.titleLabel?.text == self.currentQuestion?.airportName {
+        if isButtonCorrect(sender) {
             // correct!
             correctLabel.backgroundColor = UIColor.greenColor()
             correctLabel.text = "Correct!"
+            
+            sender.backgroundColor = UIColor.greenColor()
+            sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            
             numberCorrect++
         } else {
             // wrong!
             correctLabel.backgroundColor = UIColor.redColor()
             correctLabel.text = "Incorrect!"
+            
+            sender.backgroundColor = UIColor.redColor()
+            sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            // find correct answer button
+            if let correctButton = findCorrectAnswerButton() {
+                correctButton.backgroundColor = UIColor.greenColor()
+                correctButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            }
+            
         }
         
         self.resultLabelLandscapeTopMargin.constant = 900
@@ -106,12 +119,42 @@ class ViewController: UIViewController {
         
     }
     
+    func findCorrectAnswerButton() -> UIButton? {
+        if isButtonCorrect(self.answerButton1) {
+            return self.answerButton1
+        }
+        if isButtonCorrect(self.answerButton2) {
+            return self.answerButton2
+        }
+        if isButtonCorrect(self.answerButton3) {
+            return self.answerButton3
+        }
+        return nil;
+    }
+    
+    func isButtonCorrect(button:UIButton) -> Bool {
+        if button.titleLabel?.text == self.currentQuestion?.airportName {
+            return true
+        }
+        return false
+    }
+    
     func enableAnswerButtons(enable:Bool) {
         self.answerButton1.enabled = enable;
         self.answerButton2.enabled = enable;
         self.answerButton3.enabled = enable;
     }
     
+    func resetAllButtonColors() {
+        resetButtonColors(answerButton1)
+        resetButtonColors(answerButton2)
+        resetButtonColors(answerButton3)
+    }
+    
+    func resetButtonColors(button:UIButton) {
+        button.backgroundColor = UIColor.yellowColor()
+        button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+    }
     
     func changeAirport() {
         
@@ -134,11 +177,11 @@ class ViewController: UIViewController {
                 // We can display another airport
                 self.currentQuestion = self.questions[nextQuestionIndex]
                 self.displayCurrentAirport()
+                self.resetAllButtonColors()
                 // enable all answer buttons
-                enableAnswerButtons(true)
+                self.enableAnswerButtons(true)
             } else {
                 // end of game
-                
                 showFinalScore()
             }
         }
