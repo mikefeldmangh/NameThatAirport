@@ -25,6 +25,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var scoreView: UIView!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    // Timer properties
+    let maxTime = 10
+    var timer:NSTimer!
+    var countdown:Int = 10
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     let model = AirportModel()
     var questions = [AirportQuestion]()
@@ -63,18 +69,60 @@ class ViewController: UIViewController {
                 self.airportImageView.alpha = 1.0
             })
 
+            self.resetAllButtonColors()
             
             self.answerButton1.setTitle(actualCurrentQuestion.answers[0], forState: UIControlState.Normal)
             self.answerButton2.setTitle(actualCurrentQuestion.answers[1], forState: UIControlState.Normal)
             self.answerButton3.setTitle(actualCurrentQuestion.answers[2], forState: UIControlState.Normal)
+            
+            // enable all answer buttons
+            self.enableAnswerButtons(true)
+            
+            self.countdown = self.maxTime
+            self.progressBar.setProgress(0.0, animated: false)
+            self.timerLabel.text = String(countdown)
+            
+            // Start the timer
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
         }
     }
     
+    func timerUpdate() {
+        self.countdown--
+        
+        // Update the countdown label
+        self.timerLabel.text = String(countdown)
+        
+        if countdown > 7 {
+            self.progressBar.setProgress(calcProgress(countdown), animated: true)
+        }
+        
+        if countdown == 0 {
+            
+            // Stop the timer
+            self.timer.invalidate()
+            
+            correctLabel.backgroundColor = UIColor.redColor()
+            correctLabel.text = "Times Up!"
+            
+            // find correct answer button
+            styleCorrectButton()
+            
+            self.questionDone()
+        }
+    }
+    
+    func calcProgress(time:Int) -> Float {
+        return Float(self.maxTime) - Float(time)/Float(self.maxTime)
+    }
     
     @IBAction func answerTapped(sender: UIButton) {
     
+        // Stop the timer
+        self.timer.invalidate()
+        
         // disable all answer buttons
-        enableAnswerButtons(false)
+        self.enableAnswerButtons(false)
         
         // check if answer is correct
         if isButtonCorrect(sender) {
@@ -94,13 +142,13 @@ class ViewController: UIViewController {
             sender.backgroundColor = UIColor.redColor()
             sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             // find correct answer button
-            if let correctButton = findCorrectAnswerButton() {
-                correctButton.backgroundColor = UIColor.greenColor()
-                correctButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            }
-            
+            styleCorrectButton()
         }
         
+        self.questionDone()
+    }
+    
+    func questionDone() {
         self.resultLabelLandscapeTopMargin.constant = 900
         self.resultLabelPortraitTopMargin.constant = 900
         self.view.layoutIfNeeded()
@@ -108,7 +156,7 @@ class ViewController: UIViewController {
         UIView.animateWithDuration(0.5, animations: {
             
             self.resultLabelLandscapeTopMargin.constant = 115
-            self.resultLabelPortraitTopMargin.constant = 55
+            self.resultLabelPortraitTopMargin.constant = 100
             self.view.layoutIfNeeded()
             
             self.correctLabel.alpha = 1.0
@@ -117,6 +165,13 @@ class ViewController: UIViewController {
         // Go to next airport
         var timer1 = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("changeAirport"), userInfo: nil, repeats: false)
         
+    }
+    
+    func styleCorrectButton() {
+        if let correctButton = findCorrectAnswerButton() {
+            correctButton.backgroundColor = UIColor.greenColor()
+            correctButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        }
     }
     
     func findCorrectAnswerButton() -> UIButton? {
@@ -177,9 +232,6 @@ class ViewController: UIViewController {
                 // We can display another airport
                 self.currentQuestion = self.questions[nextQuestionIndex]
                 self.displayCurrentAirport()
-                self.resetAllButtonColors()
-                // enable all answer buttons
-                self.enableAnswerButtons(true)
             } else {
                 // end of game
                 showFinalScore()
