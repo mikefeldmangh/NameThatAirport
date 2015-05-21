@@ -44,6 +44,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.startGame()
+    }
+    
+    func startGame() {
         // Hide the dim and result views
         self.dimView.alpha = 0
         self.scoreView.alpha = 0
@@ -56,6 +60,7 @@ class ViewController: UIViewController {
             currentQuestion = questions[0]
             self.displayCurrentAirport()
         }
+
     }
 
     func displayCurrentAirport() {
@@ -93,9 +98,7 @@ class ViewController: UIViewController {
         // Update the countdown label
         self.timerLabel.text = String(countdown)
         
-        if countdown > 7 {
-            self.progressBar.setProgress(calcProgress(countdown), animated: true)
-        }
+        self.progressBar.setProgress(calcProgress(countdown), animated:true)
         
         if countdown == 0 {
             
@@ -248,6 +251,14 @@ class ViewController: UIViewController {
             self.dimView.alpha = 1
             self.scoreView.alpha = 1
         })
+    }
+    
+    @IBAction func restartTapped(sender: UIButton) {
+    
+        // Reset the score
+        self.numberCorrect = 0
+        
+        self.startGame()
     }
     
     override func didReceiveMemoryWarning() {

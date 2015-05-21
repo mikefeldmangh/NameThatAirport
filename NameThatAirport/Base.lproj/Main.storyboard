@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oB7-XU-DQ6" userLabel="AnswerView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oB7-XU-DQ6" userLabel="AnswerView">
                                 <rect key="frame" x="150" y="300" width="300" height="300"/>
                                 <subviews>
                                     <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CrS-AT-2vb">
@@ -25,7 +25,7 @@
                                         <color key="progressTintColor" red="0.13801410019999999" green="1" blue="0.32262899699999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="trackTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </progressView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arz-KG-UhA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arz-KG-UhA">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
                                             <action selector="answerTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QW2-Du-fw3"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0f-us-K3r">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0f-us-K3r">
                                         <rect key="frame" x="44" y="161" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.93655742760000005" green="1" blue="0.40735341330000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Answer1">
@@ -106,12 +106,12 @@
                                         <exclude reference="gpQ-Kc-Ahd"/>
                                         <exclude reference="mMa-Ib-p3H"/>
                                         <exclude reference="nMa-4U-Adp"/>
-                                        <exclude reference="6Wm-jz-R0g"/>
-                                        <exclude reference="a6m-O6-AEi"/>
                                         <exclude reference="2Qq-VV-J0x"/>
                                         <exclude reference="5kM-KW-P2J"/>
                                         <exclude reference="FFA-c9-PeV"/>
                                         <exclude reference="NUn-0F-pnG"/>
+                                        <exclude reference="6Wm-jz-R0g"/>
+                                        <exclude reference="a6m-O6-AEi"/>
                                         <exclude reference="17b-E5-gjc"/>
                                         <exclude reference="D23-wS-c7q"/>
                                         <exclude reference="LN1-xj-Cxl"/>
@@ -129,9 +129,9 @@
                                         <include reference="gpQ-Kc-Ahd"/>
                                         <include reference="mMa-Ib-p3H"/>
                                         <include reference="nMa-4U-Adp"/>
-                                        <include reference="6Wm-jz-R0g"/>
                                         <include reference="2Qq-VV-J0x"/>
                                         <include reference="FFA-c9-PeV"/>
+                                        <include reference="6Wm-jz-R0g"/>
                                         <include reference="D23-wS-c7q"/>
                                         <include reference="hGy-JW-Gjv"/>
                                         <include reference="YPm-KX-SXj"/>
@@ -150,10 +150,10 @@
                                         <include reference="JRj-ce-0Q8"/>
                                         <include reference="QbJ-Xb-bi1"/>
                                         <include reference="RQZ-9z-qan"/>
-                                        <include reference="a6m-O6-AEi"/>
+                                        <include reference="hkU-Cn-P0F"/>
                                         <include reference="5kM-KW-P2J"/>
                                         <include reference="NUn-0F-pnG"/>
-                                        <include reference="hkU-Cn-P0F"/>
+                                        <include reference="a6m-O6-AEi"/>
                                         <include reference="17b-E5-gjc"/>
                                         <include reference="LN1-xj-Cxl"/>
                                         <include reference="TuY-3u-0EA"/>
@@ -238,6 +238,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="restartTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4Ph-LR-Nvo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
@@ -247,7 +250,7 @@
                                     <constraint firstAttribute="centerX" secondItem="jh0-ic-3f3" secondAttribute="centerX" id="BLW-Lj-UUx"/>
                                     <constraint firstAttribute="bottom" secondItem="OgO-6A-HGG" secondAttribute="bottom" constant="50" id="Cmn-C9-KAl"/>
                                     <constraint firstItem="3XE-SR-Udj" firstAttribute="top" secondItem="SaR-yG-BDt" secondAttribute="top" constant="200" id="PmM-JH-Qer"/>
-                                    <constraint firstAttribute="bottom" secondItem="OgO-6A-HGG" secondAttribute="bottom" constant="250" id="PnP-L3-Dpu"/>
+                                    <constraint firstAttribute="bottom" secondItem="OgO-6A-HGG" secondAttribute="bottom" constant="215" id="PnP-L3-Dpu"/>
                                     <constraint firstAttribute="centerX" secondItem="3XE-SR-Udj" secondAttribute="centerX" id="Z6c-m1-i8Y"/>
                                     <constraint firstAttribute="centerX" secondItem="OgO-6A-HGG" secondAttribute="centerX" id="dlT-ja-3lP"/>
                                 </constraints>
