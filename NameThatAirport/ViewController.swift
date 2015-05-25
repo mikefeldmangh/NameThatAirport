@@ -58,6 +58,10 @@ class ViewController: UIViewController {
         // Check if there's at least 1 question
         if self.questions.count > 0 {
             currentQuestion = questions[0]
+            
+            // Load state
+            self.loadState()
+            
             self.displayCurrentAirport()
         }
 
@@ -89,6 +93,9 @@ class ViewController: UIViewController {
             
             // Start the timer
             self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("timerUpdate"), userInfo: nil, repeats: true)
+            
+            // Save state
+            self.saveState()
         }
     }
     
@@ -237,6 +244,9 @@ class ViewController: UIViewController {
                 self.displayCurrentAirport()
             } else {
                 // end of game
+                // Erase any saved data
+                self.eraseState()
+                
                 showFinalScore()
             }
         }
@@ -260,6 +270,62 @@ class ViewController: UIViewController {
         
         self.startGame()
     }
+    
+    func eraseState() {
+        let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setInteger(0, forKey: "numberCorrect")
+        userDefaults.setInteger(0, forKey: "questionIndex")
+        userDefaults.setObject(nil, forKey: "questions")
+        
+        userDefaults.synchronize()
+    }
+    
+    func saveState() {
+        
+        let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // Save the current score, current question
+        userDefaults.setInteger(self.numberCorrect, forKey: "numberCorrect")
+        
+        // Find the current index of question
+        let indexOfCurrentQuestion:Int? = find(self.questions, self.currentQuestion!)
+        
+        if let actualIndex = indexOfCurrentQuestion {
+            userDefaults.setInteger(actualIndex, forKey: "questionIndex")
+        }
+        
+        let questionData = NSKeyedArchiver.archivedDataWithRootObject(self.questions)
+        userDefaults.setObject(questionData, forKey: "questions")
+        
+        // Save the changes
+        userDefaults.synchronize()
+       
+    }
+    
+    func loadState() {
+        
+        let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // Retrieve the list of questions
+        let questionData = userDefaults.objectForKey("questions") as? NSData
+        
+        if let questionData = questionData {
+        
+            self.questions = NSKeyedUnarchiver.unarchiveObjectWithData(questionData) as! [AirportQuestion]
+            
+            // Load the saved question into the current question
+            let currentQuestionIndex = userDefaults.integerForKey("questionIndex")
+        
+            if currentQuestionIndex < self.questions.count {
+                self.currentQuestion = self.questions[currentQuestionIndex]
+            }
+            // Load the score
+            let score = userDefaults.integerForKey("numberCorrect")
+            self.numberCorrect = score
+        }
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

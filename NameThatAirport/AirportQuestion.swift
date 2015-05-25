@@ -8,10 +8,22 @@
 
 import UIKit
 
-class AirportQuestion: NSObject {
+class AirportQuestion: NSObject, NSCoding {
    
     var airportName = ""
     var answers:[String] = [String]()
+    
+    override init() {}
+    
+    required init(coder decoder:NSCoder) {
+        self.airportName = decoder.decodeObjectForKey("airportName") as! String
+        self.answers = decoder.decodeObjectForKey("answers") as! [String]
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(self.airportName, forKey: "airportName")
+        coder.encodeObject(self.answers, forKey: "answers")
+    }
     
     func setAnswerArray(answers:[String]) {
         self.answers = sorted(answers, doesFirstComeBeforeSecond)
